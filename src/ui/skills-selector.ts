@@ -423,7 +423,8 @@ class SkillsSelectorComponent extends Container implements Focusable {
 					const packageLabel = getPackageLabel(skill);
 					const source = packageLabel ? this.theme.fg("muted", ` - [${packageLabel}]`) : "";
 					const descriptionPrefix = packageLabel ? " " : " - ";
-					const description = this.theme.fg("dim", `${descriptionPrefix}${skill.description}`);
+					const safeDescription = skill.description.replace(/\s+/g, " ").trim();
+					const description = this.theme.fg("dim", `${descriptionPrefix}${safeDescription}`);
 					this.listContainer.addChild(new SingleLineText(`${prefix}${name}${status}${scope}${source}${description}`, descriptionEllipsis));
 				}
 			}
